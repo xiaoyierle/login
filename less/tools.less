@@ -1,0 +1,62 @@
+@import "var";
+//混合模式 js函数
+.centerBox(){
+  position: absolute;
+  left: 0;
+  right:0;
+  top:0;
+  bottom:0;
+  margin:auto;
+}
+.rect(@width:100px){
+  width:@width;
+  height: @width;
+  background: @boxColor;
+}
+.circle(@width:100px){
+  width: @width;
+  height:@width;
+  background:@boxColor;
+  border-radius: 50%;
+
+}
+.wrapper(@height:auto){
+  width:@innerWidth;
+  height:@height;
+  margin: 0 auto;
+}
+.box(@width:100px,@height:100px){
+  width:@width;
+  height: @height;
+}
+.user(){
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.bg(@color){
+  background-color: @color;
+}
+.border(@color:red){
+  border:1px solid red;
+}
+.positionlt(){
+  position: absolute;
+  left:0;
+  top:0;
+}
+.positionrb(){
+  position: absolute;
+  right:0;
+  bottom:0;
+}
+.clearfix:after{
+  content:"";
+  display: block;
+  clear:both;
+}
+.animate(@name,@time,@timingfunction:linear,@count:1){
+  animation:@arguments;
+  -webkit-animation: @arguments;
+}

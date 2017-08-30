@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/sign.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <script src="js/jQuery1.10.2.js"></script>
+    <script src="js/jquery.validate.js"></script>
+</head>
+<body>
+    <div class="signbox">
+        <form action="checksign.php" method="post" id="form1" class="form-horizontal">
+            <div class="form-group">
+                <label for="inputEmail3" class="col-sm-2 control-label">用户名</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="inputEmail3" placeholder="请输入用户名" name="username">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-sm-2 control-label">密码</label>
+                <div class="col-sm-10">
+                    <input type="password" class="form-control" id="pass" name="password1">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-sm-2 control-label">确认密码</label>
+                <div class="col-sm-10">
+                    <input type="password" class="form-control" name="password2">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-2">
+                    <input type="submit" value="注册" class="btn btn-default">
+                </div>
+                <div class="col-sm-offset-4 col-sm-2">
+                    <input type="button" value="登录" onclick="location.href='login.html'" class="btn btn-default">
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+<script>
+   /* $("[name=username]").change(function(){
+        if($(this).val()==""){
+            return;
+        }
+        $.ajax("checkuser.php",{
+            data:{username:$(this).val()},
+            success:function(r){
+                if(r==0){
+                    $("[name=username]").after("<span class='tip'>用户名已存在</span>");
+                    $(":submit").prop("disabled","true");
+                }else{
+                    $(".tip").remove();
+                    $(":submit").prop("disabled","false");
+                }
+            }
+        })
+    })*/
+    $("#form1").validate({
+       rules:{
+           username:{
+               required:true,
+               rangelength:[3,6],
+               remote:{
+                   url:"checkuser.php",
+                   data:{
+                       username:function(){
+                           return $("[name=username]").val();
+                       }
+                   }//利用validate进行远程的验证
+               }
+           },
+           password1:{
+               required:true,
+               rangelength:[3,9]
+           },
+           password2:{
+               required:true,
+               rangelength:[3,9],
+               equalTo:"#pass"
+           }
+       },
+        messages:{
+            username:{
+                required:"用户名必须填写",
+                rangelength:"用户名的长度必须是3-6位",
+                remote:"用户名已存在"
+            },
+            password1:{
+                required:"密码必须填写",
+                rangelength:"密码的长度必须是3-9位"
+            },
+            password2:{
+                required:"密码必须填写",
+                rangelength:"密码的长度必须是3-9位",
+                equalTo:"请保持两次输入的密码一致"
+            }
+        },
+//        debug:true
+    });
+</script>
+</html>

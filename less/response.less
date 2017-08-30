@@ -1,0 +1,68 @@
+@import "var.less";
+*{
+  box-sizing: border-box;
+}
+.container{
+  width:100%;
+  height:auto;
+  margin:0 auto;
+  padding-left: @margin;
+  padding-right:@margin;
+  &-fluid{
+    width:100%;
+    height:auto;
+    padding-left: @margin;
+    padding-right: @margin;
+  }
+}
+.row{
+  width:auto;
+  height:auto;
+  margin-left: -15px;
+  margin-right: -15px;
+  &:after{
+    content:"";
+    display: block;
+    clear: both;
+  }
+}
+.response(@i:1,@type)when(@i<=@cols){
+  .col-@{type}-@{i}{
+    width:@i/@cols*100%;
+    height:auto;
+    min-height:1px;
+    float: left;
+    padding-left:@margin;
+    padding-right:@margin;
+    position: relative;
+  }
+  .col-@{type}-offset-@{i}{
+    margin-left:@i/@cols*100%;
+  }
+  .col-@{type}-push-@{i}{
+    left:@i/@cols*100%;
+  }
+  .col-@{type}-pull-@{i}{
+    right:@i/@cols*100%;
+  }
+  .response(@i+1,@type);
+}
+.response(@type:xs);
+@media screen and (min-width:@small){
+  .container{
+    width: @smallcontainer;
+  }
+  .response(@type:sm);
+}
+@media screen and (min-width:@middle){
+  .container{
+    width: @middlecontainer;
+  }
+  .response(@type:md);
+}
+@media screen and (min-width:@large){
+  .container{
+    width: @largecontainer;
+  }
+  .response(@type:lg);
+}

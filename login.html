@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/sign.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <script src="js/jQuery1.10.2.js"></script>
+    <script src="js/jquery.validate.js"></script>
+</head>
+<body>
+<div class="signbox">
+    <form action="checklogin.php" method="post" id="form1" class="form-horizontal" autocomplete="off">
+        <div class="form-group">
+            <label for="inputEmail3" class="col-sm-2 control-label">用户名</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="inputEmail3" placeholder="请输入用户名" name="username">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputEmail3" class="col-sm-2 control-label">密码</label>
+            <div class="col-sm-10">
+                <input type="password" class="form-control" id="pass" name="password">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">验证码</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" name="code">
+            </div>
+            <div class="col-sm-4" id="code">
+                <img src="code.php" alt="" onclick="this.src='code.php?'+new Date().getTime()">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-2">
+                <input type="submit" value="登录" class="btn btn-default">
+            </div>
+            <div class="col-sm-offset-4 col-sm-2">
+                <input type="button" value="注册" onclick="location.href='sign.html'" class="btn btn-default">
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+<script>
+/*    $.get("code.php",function(r){
+        $("#code").html(r);
+    });*/
+    $("#form1").validate({
+        rules:{
+            username:{
+                required:true,
+                rangelength:[3,6]
+            },
+            password:{
+                required:true,
+                rangelength:[3,9]
+            },
+        },
+        messages:{
+            username:{
+                required:"用户名必须填写",
+                rangelength:"用户名的长度必须是3-6位"
+            },
+            password:{
+                required:"密码必须填写",
+                rangelength:"密码的长度必须是3-9位"
+            },
+        },
+//        debug:true
+    });
+</script>
+</html>

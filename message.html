@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .msgbox{
+            width:300px;
+            height:300px;
+            border:1px solid #ccc;
+            position: fixed;
+            left: 0;
+            right:0;
+            left:0;
+            right:0;
+            margin:auto;
+            line-height: 50px;
+        }
+    </style>
+</head>
+<body>
+<h1>信息提示界面</h1>
+<div class="msgbox">
+    <span><?php echo $msg;?></span>,本页面会在 <b>3</b>秒后跳转，直接跳转请 <a href="<?php echo $href;?>">点击</a>
+</div>
+
+</body>
+<script>
+    var time=document.querySelector("b");
+    var link=document.querySelector("a");
+    var num=3;
+    setInterval(function(){
+        num--;
+        time.innerHTML=num;
+            if(num===0){
+                location.href=link.href;
+            }
+    },1000)
+</script>
+</html>
